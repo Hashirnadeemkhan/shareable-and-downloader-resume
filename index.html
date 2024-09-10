@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resume Generator</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <div class="box">
+            <h1>Dynamic Resume Generator</h1>
+            <hr>
+            <form id="resumeForm"> <!-- Added form element -->
+                <div class="form">
+                    <div class="intro">
+                        <label for="firstName">First name</label>
+                        <input type="text" id="firstName" name="firstName" placeholder="Enter your first name" required>
+                    </div>
+
+                    <div class="intro">
+                        <label for="lastName">Last name</label>
+                        <input type="text" id="lastName" name="lastName" placeholder="Enter your last name" required>
+                    </div>
+                </div>
+
+                <div class="email">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" placeholder="Enter your email" required>
+                </div>
+
+                <div class="intro">
+                    <label for="phone">Phone Number</label>
+                    <input type="text" id="phone" name="phone" placeholder="Enter your phone number" required>
+                </div>
+
+                <div class="intro">
+                    <label for="address">Address</label>
+                    <input type="text" id="address" name="address" placeholder="Enter your address" required>
+                </div>
+
+                <div class="intro">
+                    <label for="skills">Skills</label>
+                    <input type="text" id="skills" name="skills" placeholder="Enter your skills" required>
+                </div>
+
+                <div class="intro">
+                    <label for="education">Education</label>
+                    <input type="text" id="education" name="education" placeholder="Enter your education" required>
+                </div>
+
+                <div class="intro">
+                    <label for="experience">Experience</label>
+                    <input type="text" id="experience" name="experience" placeholder="Enter your experience" required>
+                </div>
+
+                <div class="intro">
+                    <label for="courses">Courses</label>
+                    <input type="text" id="courses" name="courses" placeholder="Enter your courses (if any)">
+                </div>
+
+                <div class="intro">
+                    <label for="summary">Summary</label>
+                    <textarea id="summary" name="summary" placeholder="Write a brief summary" required></textarea>
+                </div>
+
+                <button id="generateResume" type="submit">Generate Resume</button>
+                
+            </form>
+        </div>
+
+        <div class="box1">
+            <div class="showing-info">
+                <h2>Your Dynamic Resume</h2>
+                <p id="display-name"><strong>Name :</strong> <span id="displayName"></span></p>
+                <p><strong>Email:</strong> <span id="displayEmail"></span></p>
+                <p><strong>Phone:</strong> <span id="displayPhone"></span></p>
+                <p><strong>Skills:</strong>
+                    <ul id="displaySkills"></ul> <!-- Skills list will be inserted here -->
+                </p>
+                <p><strong>Experience:</strong> <span id="displayExperience"></span></p>
+                <p><strong>Address:</strong> <span id="displayAddress"></span></p>
+                <p><strong>Summary:</strong> <span id="displaySummary"></span></p>
+                <p><strong>Education:</strong> <span id="displayEducation"></span></p>
+                <p><strong>Courses:</strong> <span id="displayCourses"></span></p>
+
+
+               
+                <button id="downloadResume" type="button">Download PDF</button>
+                <button id="shareResume" type="button">Share Resume</button>
+                <button id="editResume" type="button">Edit Resume</button>
+                <button id="saveResume" type="button" style="display:none;">Save Resume</button>
+            </div>
+        </div>
+    </div>
+       <!-- Add jsPDF from CDN -->
+       <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
