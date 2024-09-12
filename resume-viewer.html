@@ -1,0 +1,83 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resume Viewer</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <div class="box1">
+            <div class="showing-info">
+                <h2>Your Dynamic Resume</h2>
+                <p id="display-name"><strong>Name :</strong> <span id="displayName"></span></p>
+                <p><strong>Email:</strong> <span id="displayEmail"></span></p>
+                <p><strong>Phone:</strong> <span id="displayPhone"></span></p>
+                <p><strong>Skills:</strong>
+                    <ul id="displaySkills"></ul>
+                </p>
+                <p><strong>Experience:</strong> <span id="displayExperience"></span></p>
+                <p><strong>Address:</strong> <span id="displayAddress"></span></p>
+                <p><strong>Summary:</strong> <span id="displaySummary"></span></p>
+                <p><strong>Education:</strong> <span id="displayEducation"></span></p>
+                <p><strong>Courses:</strong> <span id="displayCourses"></span></p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            // Check if query parameters exist
+            const urlParams = new URLSearchParams(window.location.search);
+
+            // If query params exist, use them; else, use localStorage
+            if (urlParams.has('firstName')) {
+                document.getElementById("displayName").innerText = `${urlParams.get('firstName')} ${urlParams.get('lastName')}`;
+                document.getElementById("displayEmail").innerText = urlParams.get('email');
+                document.getElementById("displayPhone").innerText = urlParams.get('phone');
+                document.getElementById("displayExperience").innerText = urlParams.get('experience');
+                document.getElementById("displayEducation").innerText = urlParams.get('education');
+                document.getElementById("displayAddress").innerText = urlParams.get('address');
+                document.getElementById("displaySummary").innerText = urlParams.get('summary');
+                document.getElementById("displayCourses").innerText = urlParams.get('courses');
+
+                // Process skills from query parameters
+                const skillsArray = urlParams.get('skills').split(',').map(skill => skill.trim());
+                const skillsList = document.getElementById("displaySkills");
+                skillsList.innerHTML = "";  // Clear existing content
+                skillsArray.forEach(skill => {
+                    const li = document.createElement("li");
+                    li.innerText = skill;
+                    skillsList.appendChild(li);
+                });
+            } else {
+                // Fallback to localStorage if no query params are found
+                const resumeData = JSON.parse(localStorage.getItem('resumeData'));
+                
+                if (resumeData) {
+                    document.getElementById("displayName").innerText = `${resumeData.firstName} ${resumeData.lastName}`;
+                    document.getElementById("displayEmail").innerText = resumeData.email;
+                    document.getElementById("displayPhone").innerText = resumeData.phone;
+                    document.getElementById("displayExperience").innerText = resumeData.experience;
+                    document.getElementById("displayEducation").innerText = resumeData.education;
+                    document.getElementById("displayAddress").innerText = resumeData.address;
+                    document.getElementById("displaySummary").innerText = resumeData.summary;
+                    document.getElementById("displayCourses").innerText = resumeData.courses;
+
+                    // Handle skills
+                    const skillsList = document.getElementById("displaySkills");
+                    skillsList.innerHTML = "";
+                    const skillsArray = resumeData.skills.split(",").map(skill => skill.trim());
+                    skillsArray.forEach(skill => {
+                        const li = document.createElement("li");
+                        li.innerText = skill;
+                        skillsList.appendChild(li);
+                    });
+                } else {
+                    alert("No resume data found.");
+                }
+            }
+        });
+    </script>
+</body>
+</html>
